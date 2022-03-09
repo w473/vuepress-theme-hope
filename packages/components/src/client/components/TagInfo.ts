@@ -1,16 +1,11 @@
-import {
-  randomSortArray,
-  useLocaleConfig,
-} from "@mr-hope/vuepress-shared/lib/client";
-import { defineComponent, h, onMounted, ref } from "vue";
+import { useLocaleConfig } from "@mr-hope/vuepress-shared/lib/client";
+import { defineComponent, h } from "vue";
 import { TagIcon } from "./icons";
-import Tag from "./Tag"
+import TagItem from "./TagItem";
 import { articleInfoLocales } from "../define";
 
 import type { PropType, VNode } from "vue";
 import type { ArticleTag } from "../../shared";
-
-import "../styles/tag.scss";
 
 export default defineComponent({
   name: "TagInfo",
@@ -35,17 +30,6 @@ export default defineComponent({
   setup(props) {
     const pageInfoLocale = useLocaleConfig(articleInfoLocales);
 
-    const colorMap = ref(
-      Array(9)
-        .fill(null)
-        .map((_, index) => index)
-    );
-
-
-    onMounted(() => {
-      colorMap.value = randomSortArray(colorMap.value);
-    });
-
     return (): VNode | null =>
       props.tag.length
         ? h(
@@ -60,11 +44,16 @@ export default defineComponent({
                 "ul",
                 { class: "tags-wrapper" },
                 props.tag.map(({ name, path }, index) =>
-                  h("li", 
-                    {
-                      class: "tag-item",
-                    }, 
-                    h(Tag, { name, path, color: props.color, colorIndex: index }))
+                  h(
+                    "li",
+                    { class: "tag-item" },
+                    h(TagItem, {
+                      name,
+                      path,
+                      color: props.color,
+                      colorIndex: index,
+                    })
+                  )
                 )
               ),
               h("meta", {

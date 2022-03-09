@@ -11,6 +11,10 @@ export default [
       "vuepress-plugin-sass-palette",
     ],
   }),
+  ...rollupTypescript("client/index", {
+    external: ["vue", /\.scss$/],
+    dtsExternal: [/\.scss$/],
+  }),
   ...rollupTypescript("client/appEnhance", {
     external: [
       "@vuepress/client",

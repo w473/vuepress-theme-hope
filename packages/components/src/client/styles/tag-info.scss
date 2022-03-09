@@ -1,0 +1,12 @@
+.tags-wrapper {
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
+
+  .tag-item {
+    display: inline-block;
+    margin-right: 0.5rem;
+    vertical-align: middle;
+    overflow: hidden;
+  }
+}

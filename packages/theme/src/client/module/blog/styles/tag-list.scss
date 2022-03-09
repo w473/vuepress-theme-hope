@@ -1,15 +1,9 @@
 @use "sass:color";
 @use "sass:list";
 
-.tag-list.tags-wrapper {
-  margin: 4vh 0;
-  line-height: 3.5rem;
-
-
+.tags-wrapper {
   .tag {
     font-size: 1.4rem;
-    padding-left: 1em;  // em, not rem, becuase it's leaving space
-                        // for the first character
+    padding-left: 1em;
   }
 }
-

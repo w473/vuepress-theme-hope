@@ -1,12 +1,11 @@
+import { TagInfo } from "@mr-hope/vuepress-plugin-components/lib/client";
 import { usePageFrontmatter } from "@vuepress/client";
 import { computed, defineComponent, h } from "vue";
 
 import { useTagMap } from "@theme-hope/module/blog/composables";
 
-
 import type { VNode } from "vue";
 import type { BlogPluginCategoryFrontmatter } from "vuepress-plugin-blog2";
-import Tag from "./Tag"
 import "../styles/tag-list.scss";
 
 export default defineComponent({
@@ -29,13 +28,18 @@ export default defineComponent({
     return (): VNode =>
       h(
         "ul",
-        { class: "tag-list tags-wrapper" },
+        { class: "tag-list-wrapper" },
         tagList.value.map(({ name, path }) =>
-          h("li", 
-            {
-              class: "tag-item",
-            },
-            h(Tag, { name, path, color: true, highlightCurrent: isActive(name) })),
+          h(
+            "li",
+            { class: "tag-item" },
+            h(TagInfo, {
+              name,
+              path,
+              color: true,
+              active: isActive(name),
+            })
+          )
         )
       );
   },

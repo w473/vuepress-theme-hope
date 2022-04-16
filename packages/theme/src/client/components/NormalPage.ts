@@ -2,13 +2,17 @@ import { isComponentRegistered } from "@mr-hope/vuepress-shared/lib/client";
 import { usePageFrontmatter } from "@vuepress/client";
 import { computed, defineComponent, h, resolveComponent } from "vue";
 
+import BreadCrumb from "@theme-hope/components/BreadCrumb";
 import MarkdownContent from "@theme-hope/components/MarkdownContent";
-import PageMeta from "@theme-hope/components/PageMeta";
 import PageNav from "@theme-hope/components/PageNav";
 import PageTitle from "@theme-hope/components/PageTitle";
-import { useIconPrefix } from "@theme-hope/composables";
-import PasswordModal from "@theme-hope/module/encrypt/components/PasswordModal";
+
 import { useThemeLocaleData } from "@theme-hope/composables";
+
+import PasswordModal from "@theme-hope/module/encrypt/components/PasswordModal";
+import PageMeta from "@theme-hope/module/info/components/PageMeta";
+import TOC from "@theme-hope/module/info/components/TOC";
+
 import { usePathEncrypt } from "@theme-hope/module/encrypt/composables";
 import { useDarkMode } from "@theme-hope/module/outlook/composables";
 
@@ -23,23 +27,8 @@ export default defineComponent({
   setup(_props, { slots }) {
     const frontmatter = usePageFrontmatter<HopeThemeNormalPageFrontmatter>();
     const { isDarkMode } = useDarkMode();
-    const iconPrefix = useIconPrefix();
     const themeLocale = useThemeLocaleData();
     const { isEncrypted, validateToken } = usePathEncrypt();
-
-    const breadcrumbEnable = computed(
-      () =>
-        frontmatter.value.breadcrumb ||
-        (frontmatter.value.breadcrumb !== false &&
-          themeLocale.value.breadcrumb !== false)
-    );
-
-    const breadcrumbIconEnable = computed(
-      () =>
-        frontmatter.value.breadcrumbIcon ||
-        (frontmatter.value.breadcrumbIcon !== false &&
-          themeLocale.value.breadcrumbIcon !== false)
-    );
 
     const tocEnable = computed(
       () =>
@@ -55,14 +44,10 @@ export default defineComponent({
           ? h(PasswordModal, { onVerify: validateToken })
           : [
               slots.top?.(),
-              h(resolveComponent("BreadCrumb"), {
-                enable: breadcrumbEnable.value,
-                icon: breadcrumbIconEnable.value,
-                iconPrefix: iconPrefix.value,
-              }),
+              h(BreadCrumb),
               h(PageTitle),
               tocEnable.value
-                ? h(resolveComponent("TOC"), {
+                ? h(TOC, {
                     headerDepth:
                       frontmatter.value.headerDepth ??
                       themeLocale.value.headerDepth,

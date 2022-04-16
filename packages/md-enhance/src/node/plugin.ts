@@ -4,10 +4,10 @@ import {
   addViteOptimizeDepsInclude,
   addViteSsrExternal,
   addViteSsrNoExternal,
-  noopModule,
 } from "@mr-hope/vuepress-shared";
-import { path } from "@vuepress/utils";
 import { useSassPalettePlugin } from "vuepress-plugin-sass-palette";
+
+import { checkLinks, getCheckLinksStatus } from "./checkLink";
 import {
   codeDemoDefaultSetting,
   flowchart,
@@ -23,6 +23,7 @@ import {
   sup,
   tasklist,
 } from "./markdown-it";
+import { prepareAppEnhanceFile, prepareRevealPluginFile } from "./prepare";
 import { usePlugins } from "./usePlugins";
 import { MATHML_TAGS } from "./utils";
 
@@ -41,11 +42,7 @@ export const mdEnhancePlugin: Plugin<MarkdownEnhanceOptions> = (
       ? Boolean(options.gfm)
       : options.enableAll || false;
 
-  const alignEnable = getStatus("align");
   const chartEnable = getStatus("chart");
-  const containerEnable = getStatus("container");
-  const codegroupEnable = getStatus("codegroup");
-  const demoEnable = getStatus("demo");
   const flowchartEnable = getStatus("flowchart");
   const footnoteEnable = getStatus("footnote", true);
   const imageMarkEnable = getStatus("imageMark", true);
@@ -53,6 +50,8 @@ export const mdEnhancePlugin: Plugin<MarkdownEnhanceOptions> = (
   const mermaidEnable = getStatus("mermaid");
   const presentationEnable = getStatus("presentation");
   const texEnable = getStatus("tex");
+
+  const shouldCheckLinks = getCheckLinksStatus(app, options);
 
   const katexOptions: KatexOptions = {
     macros: {
@@ -80,39 +79,8 @@ export const mdEnhancePlugin: Plugin<MarkdownEnhanceOptions> = (
   return {
     name: "vuepress-plugin-md-enhance",
 
-    alias: {
-      "@ChartJS": chartEnable
-        ? path.resolve(__dirname, "../client/components/ChartJS.js")
-        : noopModule,
-      "@CodeDemo": demoEnable
-        ? path.resolve(__dirname, "../client/components/CodeDemo.js")
-        : noopModule,
-      "@CodeGroup": codegroupEnable
-        ? path.resolve(__dirname, "../client/components/CodeGroup.js")
-        : noopModule,
-      "@CodeGroupItem": codegroupEnable
-        ? path.resolve(__dirname, "../client/components/CodeGroupItem.js")
-        : noopModule,
-      "@FlowChart": flowchartEnable
-        ? path.resolve(__dirname, "../client/components/FlowChart.js")
-        : noopModule,
-      "@Mermaid": mermaidEnable
-        ? path.resolve(__dirname, "../client/components/Mermaid.js")
-        : noopModule,
-      "@Presentation": presentationEnable
-        ? path.resolve(__dirname, "../client/components/Presentation.js")
-        : noopModule,
-    },
-
     define: (): Record<string, unknown> => ({
-      MARKDOWN_ENHANCE_ALIGN: alignEnable,
-      MARKDOWN_ENHANCE_CONTAINER: containerEnable,
-      MARKDOWN_ENHANCE_DEMO: demoEnable,
       MARKDOWN_ENHANCE_DELAY: options.delay || 500,
-      MARKDOWN_ENHANCE_FOOTNOTE: footnoteEnable,
-      MARKDOWN_ENHANCE_IMAGE_MARK: imageMarkEnable,
-      MARKDOWN_ENHANCE_TASKLIST: tasklistEnable,
-      MARKDOWN_ENHANCE_TEX: texEnable,
       CODE_DEMO_OPTIONS: {
         ...codeDemoDefaultSetting,
         ...(typeof options.demo === "object" ? options.demo : {}),
@@ -124,11 +92,6 @@ export const mdEnhancePlugin: Plugin<MarkdownEnhanceOptions> = (
         typeof options.presentation.revealConfig === "object"
           ? options.presentation.revealConfig
           : {},
-      REVEAL_PLUGIN_HIGHLIGHT: revealPlugins.includes("highlight"),
-      REVEAL_PLUGIN_MATH: revealPlugins.includes("math"),
-      REVEAL_PLUGIN_NOTES: revealPlugins.includes("notes"),
-      REVEAL_PLUGIN_SEARCH: revealPlugins.includes("search"),
-      REVEAL_PLUGIN_ZOOM: revealPlugins.includes("zoom"),
     }),
 
     extendsMarkdown: (markdownIt): void => {
@@ -152,7 +115,16 @@ export const mdEnhancePlugin: Plugin<MarkdownEnhanceOptions> = (
       if (presentationEnable) markdownIt.use(presentation);
     },
 
-    onInitialized: (app): void => {
+    extendsPage: (page, app): void => {
+      // app already initailzed
+      if (shouldCheckLinks && app.pages) {
+        checkLinks(page, app);
+      }
+    },
+
+    onInitialized: async (app): Promise<void> => {
+      if (shouldCheckLinks) app.pages.forEach((page) => checkLinks(page, app));
+
       if (katexOptions.output !== "html") addCustomElement(app, MATHML_TAGS);
 
       addViteSsrNoExternal(app, [
@@ -186,15 +158,14 @@ export const mdEnhancePlugin: Plugin<MarkdownEnhanceOptions> = (
         ]);
         addViteSsrExternal(app, "reveal.js");
       }
+
+      await Promise.all([
+        prepareAppEnhanceFile(app, options),
+        prepareRevealPluginFile(app, revealPlugins),
+      ]);
     },
 
-    clientAppEnhanceFiles: path.resolve(__dirname, "../client/appEnhance.js"),
-
-    // ...(demoEnable
-    //   ? {
-    //       clientAppSetupFiles: path.resolve(__dirname, "../client/appSetup.js"),
-    //     }
-    //   : {}),
+    clientAppEnhanceFiles: app.dir.temp(`md-enhance/appEnhance.js`),
   };
 };
 

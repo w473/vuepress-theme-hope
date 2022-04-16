@@ -61,7 +61,7 @@ features:
 
   - title: Article Encryption
     icon: lock
-    details: Encrypt you article based on path and folders, so that only the one you want could see them
+    details: Encrypt you articles based on page links, so that only the one you want could see them
     link: /guide/feature/encrypt.html
 
   - title: Copy button
@@ -105,7 +105,7 @@ footer: MIT Licensed | Copyright © 2019-present Mr.Hope
 
 ## 🛠Install
 
-Create a vuepress-theme-hope project in `[dir]` folder under the current project:
+Create a vuepress-theme-hope project in `[dir]` directory under the current project:
 
 :::: code-group
 
@@ -133,7 +133,7 @@ npm init vuepress-theme-hope@next [dir]
 
 ::: code-group-item TS
 
-```ts {2,4,6}
+```ts
 // .vuepress/config.ts
 import { defineHopeConfig } from "vuepress-theme-hope";
 
@@ -146,7 +146,7 @@ export default defineHopeConfig({
 
 ::: code-group-item JS
 
-```js {2,4,6}
+```js
 // .vuepress/config.js
 const { defineHopeConfig } = require("vuepress-theme-hope");
 
@@ -169,7 +169,7 @@ module.exports = defineHopeConfig({
 
 <!-- markdownlint-disable -->
 
-<a v-if="isNetlify === false" href="https://www.netlify.com" target="_blank">
+<a v-if="isNetlify " href="https://www.netlify.com" target="_blank">
 
 ![Deploys by Netlify](https://www.netlify.com/img/global/badges/netlify-light.svg#light)
 ![Deploys by Netlify](https://www.netlify.com/img/global/badges/netlify-dark.svg#dark)

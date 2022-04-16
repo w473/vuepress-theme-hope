@@ -87,6 +87,9 @@
       ]
     ]
   },
+  "resolutions": {
+    "minimist": "^1.2.6"
+  },
   "devDependencies": {
     "@babel/core": "7.17.9",
     "@babel/plugin-transform-modules-commonjs": "7.17.9",
@@ -96,7 +99,7 @@
     "@rollup/plugin-commonjs": "^22.0.0-14",
     "@rollup/plugin-json": "4.1.0",
     "@rollup/plugin-node-resolve": "13.2.0",
-    "@rollup/plugin-typescript": "8.3.1",
+    "@rollup/plugin-typescript": "8.3.2",
     "@textlint-rule/textlint-rule-no-unmatched-pair": "1.0.8",
     "@types/inquirer": "8.2.1",
     "@types/jest": "27.4.1",
@@ -120,7 +123,7 @@
     "lerna": "4.0.0",
     "lint-staged": "12.3.7",
     "markdownlint-cli": "0.31.1",
-    "npm-check-updates": "12.5.8",
+    "npm-check-updates": "12.5.9",
     "postcss": "8.4.12",
     "postcss-loader": "6.2.1",
     "prettier": "2.6.2",
@@ -140,7 +143,7 @@
     "rollup-plugin-terser": "7.0.2",
     "rollup-plugin-typescript2": "0.31.2",
     "rollup-plugin-vue": "6.0.0",
-    "semver": "7.3.6",
+    "semver": "7.3.7",
     "sort-package-json": "1.55.0",
     "stylelint": "14.6.1",
     "stylelint-config-prettier": "9.0.3",

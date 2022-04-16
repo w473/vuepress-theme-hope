@@ -1,18 +1,7 @@
 import type { LocaleConfig } from "@vuepress/core";
-import type {
-  ArticleInfoLocaleData,
-  BackToTopLocaleData,
-  PaginationLocaleData,
-  TOCLocaleData,
-} from "./locales";
+import type { BackToTopLocaleData } from "./locales";
 
-export type AvailableComponent =
-  | "ArticleInfo"
-  | "BreadCrumb"
-  | "Badge"
-  | "FullScreen"
-  | "Pagination"
-  | "TOC";
+export type AvailableComponent = "Badge";
 
 export interface ComponentOptions {
   /**
@@ -43,30 +32,9 @@ export interface ComponentOptions {
   backToTopThreshold?: number;
 
   /**
-   * Locales config for articleInfo
-   *
-   * 文章信息的国际化配置
-   */
-  articleInfoLocales?: LocaleConfig<ArticleInfoLocaleData>;
-
-  /**
    * backToTop button Locales config
    *
    * 返回顶部按钮国际化配置
    */
   backToTopLocales?: LocaleConfig<BackToTopLocaleData>;
-
-  /**
-   * Locales config for TOC
-   *
-   * 标题列表的国际化配置
-   */
-  tocLocales?: LocaleConfig<TOCLocaleData>;
-
-  /**
-   * Locales config for pagination
-   *
-   * 分页的国际化配置
-   */
-  paginationLocales?: LocaleConfig<PaginationLocaleData>;
 }

@@ -7,24 +7,12 @@ import {
 } from "@mr-hope/vuepress-shared";
 import { path } from "@vuepress/utils";
 import { useSassPalettePlugin } from "vuepress-plugin-sass-palette";
-import {
-  articleInfoLocales,
-  backToTopLocales,
-  tocLocales,
-  paginationLocales,
-} from "./locales";
+import { backToTopLocales } from "./locales";
 
 import type { Plugin, PluginConfig } from "@vuepress/core";
 import type { AvailableComponent, ComponentOptions } from "../shared";
 
-const availableComponents: AvailableComponent[] = [
-  "ArticleInfo",
-  "BreadCrumb",
-  "Badge",
-  "FullScreen",
-  "Pagination",
-  "TOC",
-];
+const availableComponents: AvailableComponent[] = ["Badge"];
 
 export const componentsPlugin: Plugin<ComponentOptions> = (options, app) => {
   useSassPalettePlugin(app, { id: "hope" });
@@ -42,22 +30,11 @@ export const componentsPlugin: Plugin<ComponentOptions> = (options, app) => {
     ),
 
     define: {
-      ARTICLE_INFO_LOCALES: getLocales(
-        app,
-        articleInfoLocales,
-        options.articleInfoLocales
-      ),
       BACK_TO_TOP_THRESHOLD: options.backToTopThreshold || 300,
       BACK_TO_TOP_LOCALES: getLocales(
         app,
         backToTopLocales,
         options.backToTopLocales
-      ),
-      TOC_LOCALES: getLocales(app, tocLocales, options.tocLocales),
-      PAGINATION_LOCALES: getLocales(
-        app,
-        paginationLocales,
-        options.paginationLocales
       ),
     },
 
@@ -69,8 +46,6 @@ export const componentsPlugin: Plugin<ComponentOptions> = (options, app) => {
       addViteOptimizeDepsExclude(app, "@mr-hope/vuepress-plugin-components");
 
       if (options.backToTop) addViteOptimizeDepsInclude(app, "lodash.debounce");
-      if (options.components?.includes("FullScreen"))
-        addViteOptimizeDepsInclude(app, "@vueuse/core");
     },
 
     clientAppEnhanceFiles: path.resolve(__dirname, "../client/appEnhance.js"),

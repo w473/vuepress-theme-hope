@@ -1,6 +1,6 @@
 {
   "name": "vuepress-plugin-feed2",
-  "version": "2.0.0-beta.39",
+  "version": "2.0.0-beta.44",
   "description": "Feed plugin for vuepress-theme-hope",
   "keywords": [
     "vuepress-plugin",
@@ -14,7 +14,7 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vuepress-theme-hope/vuepress-theme-hope.git",
-    "directory": "packages/feed"
+    "directory": "packages/feed2"
   },
   "license": "MIT",
   "author": {
@@ -35,7 +35,8 @@
     "dev:ts": "tsc -b tsconfig.build.json --watch"
   },
   "dependencies": {
-    "@mr-hope/vuepress-shared": "2.0.0-beta.39",
+    "@mr-hope/vuepress-shared": "2.0.0-beta.44",
+    "@vuepress/shared": "2.0.0-beta.38",
     "@vuepress/utils": "2.0.0-beta.38",
     "xml-js": "^1.6.11"
   },

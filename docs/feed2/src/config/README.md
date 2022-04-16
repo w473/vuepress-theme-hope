@@ -52,6 +52,13 @@ Set the maximum number of items in the feed. After all pages are sorted, the fir
 
 If your site has a lot of articles, you may consider this option to reduce feed file size.
 
+## customElements
+
+- Type: `string[]`
+- Default: `["ExternalLinkIcon"]`
+
+Custom element or component which should be removed in feed.
+
 ## filter
 
 - Type: `(page: Page)=> boolean`
@@ -94,21 +101,21 @@ For available options, please see [Config → Channel](channel.md)
 - Type: `string`
 - Default: `atom.xml`
 
-Atom syntax output filename, relative to dest folder
+Atom syntax output filename, relative to output directory.
 
 ## jsonOutputFilename
 
 - Type: `string`
 - Default: `feed.json`
 
-JSON syntax output filename, relative to dest folder
+JSON syntax output filename, relative to output directory.
 
 ## rssOutputFilename
 
 - Type: `string`
 - Default: `rss.xml`
 
-RSS syntax output filename, relative to dest folder.
+RSS syntax output filename, relative to output directory.
 
 ## getter
 

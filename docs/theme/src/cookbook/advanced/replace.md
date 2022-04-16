@@ -69,6 +69,7 @@ Here are list of aliases.
 Components:
 
 - `@theme-hope/components/AutoLink`: basic link
+- `@theme-hope/components/BreadCrumb`: breacrumb
 - `@theme-hope/components/CommonWrapper`: basic layout integration
 - `@theme-hope/components/HomeFeatures`: homepage features
 - `@theme-hope/components/HomeHero`: homepage logo and introduction
@@ -76,7 +77,6 @@ Components:
 - `@theme-hope/components/MarkdownContent`: Markdown content
 - `@theme-hope/components/NormalPage`: normal page
 - `@theme-hope/components/PageFooter`: page footer
-- `@theme-hope/components/PageMeta`: page meta information
 - `@theme-hope/components/PageNav`: page navigation
 - `@theme-hope/components/PageTitle`: page title
 - `@theme-hope/components/SkipLink`: skip to main content
@@ -130,6 +130,30 @@ Miscellaneous:
 
 :::
 
+::: details Info module component alias
+
+Components:
+
+- `@theme-hope/module/info/components/AuthorInfo`: author information
+- `@theme-hope/module/info/components/CategoryInfo`: category information
+- `@theme-hope/module/info/components/DateInfo`: date information
+- `@theme-hope/module/info/components/OriginalMark`: original mark
+- `@theme-hope/module/info/components/PageInfo`: page information
+- `@theme-hope/module/info/components/PageMeta`: page meta information
+- `@theme-hope/module/info/components/PageViewInfo`: page views information
+- `@theme-hope/module/info/components/ReadingTimeInfo`: reading time information
+- `@theme-hope/module/info/components/TagInfo`: tag information
+- `@theme-hope/module/info/components/TOC`: table of contents
+- `@theme-hope/module/info/components/WordInfo`: word information
+
+Miscellaneous:
+
+- `@theme-hope/module/blog/components/icons`: info icons
+- `@theme-hope/module/blog/composables`: info Composables API
+- `@theme-hope/module/blog/utils`: info utility functions
+
+:::
+
 ::: details Blog module component alias
 
 Components:
@@ -144,6 +168,7 @@ Components:
 - `@theme-hope/module/blog/components/CategoryList`: Category list
 - `@theme-hope/module/blog/components/InfoList`: blog info list
 - `@theme-hope/module/blog/components/InfoPanel`: blog info panel
+- `@theme-hope/module/blog/components/Pagination`: pagination
 - `@theme-hope/module/blog/components/ProjectPanel`: blog homepage project panel
 - `@theme-hope/module/blog/components/SocialMedia`: social media links
 - `@theme-hope/module/blog/components/TagList`: tag list
@@ -178,7 +203,7 @@ Miscellaneous:
 - `@theme-hope/module/outlook/components/OutlookSettings`: appearance settings
 - `@theme-hope/module/outlook/components/ThemeColor`: theme color
 - `@theme-hope/module/outlook/components/ThemeColorPicker`: theme color picker
-- `@theme-hope/module/outlook/components/ToggleFullScreen`: fullscreen toggle button
+- `@theme-hope/module/outlook/components/ToggleFullScreenButton`: fullscreen toggle button
 
 Miscellaneous:
 

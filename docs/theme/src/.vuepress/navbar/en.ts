@@ -83,6 +83,11 @@ export const enNavbarConfig = defineNavbarConfig([
             link: "https://vuepress-theme-hope.github.io/v2/reading-time/",
           },
           {
+            text: "Redirect Plugin",
+            icon: "navigation",
+            link: "https://vuepress-theme-hope.github.io/v2/redirect/",
+          },
+          {
             text: "Sass Palette Plugin",
             icon: "palette",
             link: "https://vuepress-theme-hope.github.io/v2/sass-palette/",
@@ -91,6 +96,11 @@ export const enNavbarConfig = defineNavbarConfig([
             text: "Seo Plugin",
             icon: "strong",
             link: "https://vuepress-theme-hope.github.io/v2/seo/",
+          },
+          {
+            text: "Sitemap Plugin",
+            icon: "sitemap",
+            link: "https://vuepress-theme-hope.github.io/v2/sitemap/",
           },
         ],
       },
